@@ -1,4 +1,4 @@
-import datetime, db
+import datetime, db, statPlot
 #ALTERNATIVE SOLUTION BY Mishin870
 
 """
@@ -17,8 +17,8 @@ def printItem(items):
 """
 Эта функция обрабатывает список элементов, принадлежащих одной неделе
 """
-def processWeekItems(list):
-    global headerItems
+def processWeekItems(list, week):
+    global headerItems, weekLabels, weekStat
     days = len(list)
     #костыль (изначально неделя = -1, чтобы не было лишних обработок. записей ведь 2 млн, а эту функция запускается в 100 раз реже)
     #и на будущее. вдруг что-то случится и в неделе станет 0 дней
@@ -67,9 +67,12 @@ def processWeekItems(list):
                 average = float(items[11].replace(",", "."))
                 summ = summ - (check - average)
         i = i + 1
-    print(summ)
+    weekLabels.append(len(weekLabels))
+    weekStat.append(summ)
 
 headerItems = []
+weekLabels = []
+weekStat = []
 
 with open("db.csv", encoding='UTF-8') as f:
     iterlines = iter(f)
@@ -91,7 +94,7 @@ with open("db.csv", encoding='UTF-8') as f:
         week = datetime.date(year, month, day).isocalendar()[1]
         if week != prevWeek:
             #если неделя кончилась, то обрабатываем предыдущую неделю, очищаем и продолжаем
-            processWeekItems(weekList)
+            processWeekItems(weekList, prevWeek)
             weekList = []
             prevWeek = week
         weekList.append(items)
@@ -99,3 +102,4 @@ with open("db.csv", encoding='UTF-8') as f:
         i = i + 1
         if i >= 5000:
             break
+    statPlot.drawPlot(weekLabels, weekStat, title='Недельная прибыль', xlabel='Недели', ylabel='Прибыль, руб')
