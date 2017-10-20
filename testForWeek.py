@@ -44,10 +44,10 @@ def processWeekItems(list):
                     print("nextCode (" + str(nextCode) + ") in stornoNum!")
                     i = i + 1
                     next(iterList)
-        #incr = float(items[12]) - float(items[11])
-        #print(incr)
-        #summ = summ + incr
+        incr = float(items[12].replace(",", ".")) - float(items[11].replace(",", "."))
+        summ = summ + incr
         i = i + 1
+    print(summ)
 
 headerItems = []
 
