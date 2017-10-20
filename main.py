@@ -42,6 +42,7 @@ with open('db_100.csv', newline='', encoding='utf-8') as f:
     reader = csv.reader(f)
     search(reader, param=9, value='2.000')
 
-    # reader = csv.reader(f)
+    f.seek(0)
+    reader = csv.reader(f)
     show(reader, value='4902915744')
 
