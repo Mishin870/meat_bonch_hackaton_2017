@@ -1,4 +1,4 @@
-import datetime
+import datetime, db
 
 """
 Функция выводит одну строку таблицы в красивом виде
@@ -10,7 +10,7 @@ def printItem(items):
     for hi, ii in zip(headerItems, items):
         if hi == "\n" or ii == "\n":
             break;
-        print(hi + ' = ' + ii)
+        print(hi + ' = ' + str(ii))
     print("===============================")
 
 def processWeekItems(list):
@@ -18,14 +18,36 @@ def processWeekItems(list):
     days = len(list)
     if days == 0:
         return
-    print("processing one week...")
-    print("len = " + str(days))
-    print("from: " + str(list[0][0]))
-    print("to: " + str(list[days - 1][0]))
+
+    #print("processing one week...")
+    #print("len = " + str(days))
+    #print("from: " + str(list[0][0]))
+    #print("to: " + str(list[days - 1][0]))
+
     i = 0
-    for items in list:
+    iterList = iter(list)
+
+    summ = 0
+    for items in iterList:
+        if i < days - 1:
+            nextCode = list[i + 1][7]
+            #проверка на сторность
+            if nextCode[0] == 'Z':
+                if nextCode in db.stornoSym:
+                    print("nextCode (" + str(nextCode) + ") in stornoSym!")
+                    i = i + 1
+                    next(iterList)
+                    continue
+            else:
+                nextCode = int(nextCode)
+                if nextCode in db.stornoNum:
+                    print("nextCode (" + str(nextCode) + ") in stornoNum!")
+                    i = i + 1
+                    next(iterList)
+        #incr = float(items[12]) - float(items[11])
+        #print(incr)
+        #summ = summ + incr
         i = i + 1
-        pass
 
 headerItems = []
 
@@ -51,5 +73,5 @@ with open("input.csv", encoding='UTF-8') as f:
             prevWeek = week
         weekList.append(items)
         i = i + 1
-        if i >= 200:
+        if i >= 5000:
             break
