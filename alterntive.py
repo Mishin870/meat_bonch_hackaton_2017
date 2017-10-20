@@ -52,10 +52,20 @@ def processWeekItems(list):
                     print("nextCode (" + str(nextCode) + ") in stornoNum!")
                     i = i + 1
                     next(iterList)
-        if int(items[14]) in db.errorShops or int(items[7]) in db.errors:
+        #if int(items[14]) in db.errorShops or int(items[7]) in db.errors:
+            #continue
+        if int(items[14]) in db.errorShops:
             continue
-        incr = float(items[12].replace(",", ".")) - float(items[11].replace(",", "."))
-        summ = summ + incr
+        if int(items[7]) in db.incrOps:
+            check = float(items[12].replace(",", "."))
+            if check != 0:
+                average = float(items[11].replace(",", "."))
+                summ = summ + (check - average)
+        if int(items[7]) in db.decrOps:
+            check = float(items[12].replace(",", "."))
+            if check != 0:
+                average = float(items[11].replace(",", "."))
+                summ = summ - (check - average)
         i = i + 1
     print(summ)
 

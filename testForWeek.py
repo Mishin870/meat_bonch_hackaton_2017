@@ -60,7 +60,7 @@ def processWeekItems(list):
 
 headerItems = []
 
-with open("input.csv", encoding='UTF-8') as f:
+with open("db_100.csv", encoding='UTF-8') as f:
     iterlines = iter(f)
     header = next(iterlines)
     headerItems = header.split("\t")

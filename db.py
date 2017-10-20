@@ -1,4 +1,6 @@
 stornoNum = [102, 162, 252, 262, 303, 310, 312, 532, 602, 642, 959, 960, 961, 962]
 stornoSym = ["Z50", "Z51"]
-errors = [303, 261]
+#errors = [303, 261]
+decrOps = []
+incrOps = [251, 601]
 errorShops = [5002]
