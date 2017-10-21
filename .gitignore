@@ -100,3 +100,6 @@ ENV/
 
 # database
 *.csv
+
+#temp files
+files/
