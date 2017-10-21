@@ -1,5 +1,6 @@
 import datetime, db, statPlot
 #ALTERNATIVE SOLUTION BY Mishin870
+import matplotlib
 
 """
 Функция выводит одну строку таблицы в красивом виде
@@ -27,6 +28,7 @@ def processWeekItems(list, week):
 
     #если нужны статы по неделе
     #print("processing one week...")
+    #import sys
     #print("len = " + str(days))
     #print("from: " + str(list[0][0]))
     #print("to: " + str(list[days - 1][0]))
@@ -42,31 +44,35 @@ def processWeekItems(list, week):
             #проверка на сторность (два варианта - номер символьный с Z и номер числовой)
             if nextCode[0] == 'Z':
                 if nextCode in db.stornoSym:
-                    print("nextCode (" + str(nextCode) + ") in stornoSym!")
-                    i = i + 1
+                    #print("nextCode (" + str(nextCode) + ") in stornoSym!")
+                    i = i + 2
                     next(iterList)
                     continue
             else:
                 nextCode = int(nextCode)
                 if nextCode in db.stornoNum:
-                    print("nextCode (" + str(nextCode) + ") in stornoNum!")
-                    i = i + 1
+                    #print("nextCode (" + str(nextCode) + ") in stornoNum!")
+                    i = i + 2
                     next(iterList)
+                    continue
         #if int(items[14]) in db.errorShops or int(items[7]) in db.errors:
             #continue
+        i = i + 1
         if int(items[14]) in db.errorShops:
             continue
-        if int(items[7]) in db.incrOps:
-            check = float(items[12].replace(",", "."))
-            if check != 0:
-                average = float(items[11].replace(",", "."))
-                summ = summ + (check - average)
-        if int(items[7]) in db.decrOps:
-            check = float(items[12].replace(",", "."))
-            if check != 0:
-                average = float(items[11].replace(",", "."))
-                summ = summ - (check - average)
-        i = i + 1
+        if items[7][0] != 'Z':
+            if int(items[7]) in db.incrOps:
+                check = float(items[12].replace(",", "."))
+                if check != 0:
+                    average = float(items[11].replace(",", "."))
+                    summ = summ + (check - average)
+            if int(items[7]) in db.decrOps:
+                check = float(items[12].replace(",", "."))
+                if check != 0:
+                    average = float(items[11].replace(",", "."))
+                    summ = summ - (check - average)
+
+    # weekLabels.append(len(weekLabels))
     weekLabels.append(len(weekLabels))
     weekStat.append(summ)
 
@@ -81,6 +87,8 @@ with open("db.csv", encoding='UTF-8') as f:
     i = 0
     prevWeek = -1
     weekList = []
+
+    dvizh = []
     for line in iterlines:
         items = line.split("\t")
         #парсим дату на составляющие
@@ -88,6 +96,10 @@ with open("db.csv", encoding='UTF-8') as f:
         day = int(date[0])
         month = int(date[1])
         year = int(date[2])
+
+        # dvizh = []
+        tovaro_dvizh = items[17]
+        dvizh.append(tovaro_dvizh)
         #На случай если нужно будет что-то сделать с уже распаршенной датой
         items[0] = date
         #получаем номер недели по календарю (числа могут быть неожиданными, но верными)
@@ -100,6 +112,7 @@ with open("db.csv", encoding='UTF-8') as f:
         weekList.append(items)
         #это просто предохранитель для тестов
         i = i + 1
-        if i >= 5000:
-            break
-    statPlot.drawPlot(weekLabels, weekStat, title='Недельная прибыль', xlabel='Недели', ylabel='Прибыль, руб')
+        #if i >= 500000:
+            #break
+    # statPlot.drawPlot(weekLabels, weekStat, title='Недельная прибыль', xlabel='Недели', ylabel='Прибыль, руб')
+    print(dvizh)
