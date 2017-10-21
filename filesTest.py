@@ -9,7 +9,7 @@ def printItem(items):
     print("===============================")
     for hi, ii in zip(headerItems, items):
         if hi == "\n" or ii == "\n":
-            break;
+            break
         print(hi + ' = ' + str(ii))
     print("===============================")
 
@@ -21,5 +21,5 @@ with open("db.csv", encoding='UTF-8') as f:
 
     for line in iterlines:
         items = line.split("\t")
-        open("files/" + str(items[0]), "a+", encoding='UTF-8').write(line)
+        open("files/" + str(items[17]), "a+", encoding='UTF-8').write(line)
         #f.write("\t".join(items))
