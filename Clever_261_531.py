@@ -1,10 +1,14 @@
 import os, sys
 import random
 from tkinter import *
+<<<<<<< HEAD
 from p.calcDecrements import getDecrements
 import matplotlib.pyplot as plt
 import datetime
 from tkinter.messagebox import *
+=======
+import p.calcDecrements
+>>>>>>> eee275df2d5df4f882159dc88cef5bf98f344deb
 
 text = ['Дата Проводки', 'Код Материала', 'Код EAN/UPC', 'Описание материала', 'Код Вида Материала',
         'Код Группы Материала', 'Описание Группы Материала', 'Код Вида Движения Материала',
@@ -105,6 +109,7 @@ def drawPlot(xs, ys, colors, legends, title=u'Мясные потери', xlabel
 
 
 root = Tk()
+<<<<<<< HEAD
 root.geometry('300x150')
 
 
@@ -120,6 +125,38 @@ def btn_1_cl(event):
     global metas
     vals16 = calcValuesByMon(2016, param)
     vals17 = calcValuesByMon(2017, param)
+=======
+root.geometry('{}x{}'.format(600, 600))
+tx = Text(root, font=('courier new', 12), width=50, height=15)
+tx.place(x=5, y=30, width=550, height=500)
+
+
+def test():
+    for file in files:
+        with open('files/' + file, encoding='UTF-8') as f:
+            for line in f:
+                tmp = ''
+                items = line.split("\t")
+                for el in range(len(text)):
+                    tmp += str(el) + ') ' + text[el] + ':' + items[el] + '\n'
+                tx.insert('1.0', tmp)
+        break
+
+
+def btn_1_cl(event):
+    test()
+
+
+btn1 = Button(root)
+btn1['text'] = 'PRESS ME TO DOWNLOAD FILE'
+btn1.place(x=5, y=5, width=550, height=20)
+btn1.bind('<Button-1>', btn_1_cl)
+
+btn2 = Button(root)
+btn2['test'] = 'CALC'
+btn2.place(x = 560, y = 5, width=50, heihgt=20)
+btn2.bind('<Button-1>', btn_2_cl)
+>>>>>>> eee275df2d5df4f882159dc88cef5bf98f344deb
 
     metas = [vals16[1], vals17[1]]
     maxLen = max([len(metas[0]), len(metas[1])])
