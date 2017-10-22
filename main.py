@@ -29,18 +29,18 @@ with open('db2.csv', newline='', encoding='utf-8') as f:
             if list == []:
                 if arr[17] in args:
                     for el in range(len(text)):
-                        # print(str(el) + ') ' + text[el] + ':', arr[el])
+                        print(str(el) + ') ' + text[el] + ':', arr[el])
                         ret.append(arr[el])
-                    # print('\n')
+                    print('\n')
                     # print('ret', ret)
                     retf.append(ret)
                     # print('1', retf)
             else:
                 if arr[17] in list:
                     for el in range(len(text)):
-                        # print(str(el) + ') ' + text[el] + ':', arr[el])
+                        print(str(el) + ') ' + text[el] + ':', arr[el])
                         ret.append(arr[el])
-                    # print('\n')
+                    print('\n')
                     # print('ret', ret)
                     retf.append(ret)
                     # print('2', retf)
@@ -121,6 +121,10 @@ with open('db2.csv', newline='', encoding='utf-8') as f:
 
 
     reader = csv.reader(f)
+    x = search(reader=reader, interval='25.09.2017 30.09.2017', a9='1.800')
+    print(x)
+
+
     # search(reader=reader, a0='30.09.2017', a9='1.800')
     # m = search(reader=reader, a17='4902915057')
     # f.seek(0)
@@ -128,7 +132,7 @@ with open('db2.csv', newline='', encoding='utf-8') as f:
     # print('\n')
 
 
-    show_me_money(reader=reader)
+    # show_me_money(reader=reader)
 
 
     # f.seek(0)

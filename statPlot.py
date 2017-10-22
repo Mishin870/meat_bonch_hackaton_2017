@@ -1,7 +1,9 @@
 import matplotlib
 import matplotlib.pyplot as plt
-
+import pylab
+import numpy as np
 import pandas as pd
+
 
 """
 This function draws a plot from x and y vectors same length
@@ -14,7 +16,7 @@ def drawPlot(x, y, title=u'Мясные потери', xlabel='Недели', yl
     line_plot = plt.plot(x, y, 'g,:')
     x_axis = max(x)
     y_axis = max(y)
-    plt.axis([0, x_axis + 25, 0, y_axis + 25])
+    plt.axis([0, x_axis + 2, 0, y_axis + 2])
     plt.title(title)
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
@@ -22,17 +24,6 @@ def drawPlot(x, y, title=u'Мясные потери', xlabel='Недели', yl
     plt.grid()
     plt.show()
 
-# def testplot():
-#     data = pd.read_csv('information.txt',sep="\t")
-    # matplotlib.style.use('ggplot')
-    # print(data.head())
-    # ts = data.head()
-    # ts = pd.Series(data.head())
-    # print(ts)
-    # ts = ts.cumsum()
-    # ts['Код Вида Движения Материала'].plot()
-    # print(ts['Код Вида Движения Материала'])
-    # print(data.groupby('Код Вида Движения Материала'))
+drawPlot([0,1,2,3,4],[0,4,5,6,1])
 
-# testplot()
 

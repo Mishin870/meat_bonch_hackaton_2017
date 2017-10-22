@@ -29,4 +29,4 @@ def plot(X, Y):
 
     plt.show()
 
-plot()
+# plot()

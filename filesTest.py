@@ -1,4 +1,4 @@
-import datetime, db, statPlot
+import datetime, db
 
 """
 Функция выводит одну строку таблицы в красивом виде
@@ -17,9 +17,8 @@ with open("db.csv", encoding='UTF-8') as f:
     iterlines = iter(f)
     header = next(iterlines)
     headerItems = header.split("\t")
-    i = 0
 
     for line in iterlines:
         items = line.split("\t")
-        open("files/" + str(items[17]), "a+", encoding='UTF-8').write(line)
+        open("files_date/" + str(items[0]), "a+", encoding='UTF-8').write(line)
         #f.write("\t".join(items))
